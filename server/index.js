@@ -24,13 +24,13 @@ app.use(session({
 massive(CONNECTION_STRING).then(db=>{
     app.set('db',db)
 })
-console.log(tc)
+
 app.post(`/auth/login`,ac.login)
 app.post(`/auth/register`,ac.register)
 app.get(`/auth/logout`,ac.logout)
 app.get(`/api/treasure/dragon`,tc.dragonTreasure)
 app.get(`/api/treasure/user`,am.userOnly,tc.getMyTreasure)
-app.get(`/api/treasure/all`,am.usersOnly,am.adminsOnly,tc.getAllTreasure)
+app.get(`/api/treasure/all`, am.userOnly, am.adminsOnly, tc.getAllTreasure)
 
 
 app.listen(PORT,()=>{console.log(`Magic at ${PORT}`)})

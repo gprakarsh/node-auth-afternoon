@@ -12,6 +12,8 @@ export default class Header extends Component {
         }
         this.handleUsernameInput=this.handleUsernameInput.bind(this)
         this.handlePasswordInput=this.handlePasswordInput.bind(this)
+        this.login=this.login.bind(this);
+        this.register=this.register.bind(this);
         // this.props.updateUser=this.props.updateUser.bind(this)
 
     }
@@ -52,8 +54,11 @@ export default class Header extends Component {
         // create POST request to register new user
         let {username,password,isAdmin} = this.state
         let user = {username,password,isAdmin}
+        let user1={username,isAdmin}
         axios.post(`/auth/register`,user).then(()=>{
-            this.props.updateUser({username,isAdmin})
+            this.props.updateUser(
+                user1
+            )
             this.setState({
                 username:'',
                 password:''

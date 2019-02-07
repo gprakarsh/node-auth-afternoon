@@ -26,13 +26,13 @@ module.exports = {
             return res.status(409).send('Username taken')
         }
 
-        const salt = bcrypt.genSalt(10)
+        const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password,salt)
 
-        const users = await db.register_user([username,password,hash])
+        const users = await db.register_user([isAdmin,username,hash])
         const user = users[0]
 
-        req.session.user={isAdmin:user.isAdmin,id:user.id,username:user.username}
+        req.session.user={isAdmin,id:user.id,username:user.username}
         return res.status(200).send(req.session.user)
 
     },
